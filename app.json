@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Chapter One Shop",
+    "slug": "ecommerce-bookstore",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "bookstore",
+    "userInterfaceStyle": "automatic",
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "headers": {
+            "Cross-Origin-Embedder-Policy": "credentialless",
+            "Cross-Origin-Opener-Policy": "same-origin"
+          }
+        }
+      ],
+      "expo-sharing"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
