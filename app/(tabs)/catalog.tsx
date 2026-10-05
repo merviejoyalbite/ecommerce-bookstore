@@ -10,6 +10,7 @@ import { CATEGORIES, FORMATS, formatPeso, type Book } from '@/data/books';
 import { BookCard } from '@/components/BookCard';
 import { Icon } from '@/components/icons';
 import { SiteHeader } from '@/components/SiteHeader';
+import { LogoWord } from '@/components/Logo';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useCart } from '@/store/cart';
 import { useShop } from '@/store/shop';
@@ -85,7 +86,7 @@ function CheckRow({
 export default function CatalogScreen() {
   const { books, getBook } = useShop();
   const cart = useCart();
-  const { small, medium } = useBreakpoint();
+  const { small, medium, compactNav, stacked } = useBreakpoint();
   const params = useLocalSearchParams<{ q?: string; cat?: string; badge?: string }>();
   const paramKey = `${params.q ?? ''}|${params.cat ?? ''}|${params.badge ?? ''}`;
   const filtersFromParams = (): Filters => ({
@@ -282,8 +283,8 @@ export default function CatalogScreen() {
           </ScrollView>
 
           {/* ── Layout ── */}
-          <View style={[styles.layout, small && styles.layoutSmall]}>
-            {!small ? (
+          <View style={[styles.layout, stacked && styles.layoutSmall]}>
+            {!compactNav ? (
               <View style={styles.sidebar}>
                 {filtersBody(draft, setDraft)}
                 <Pressable style={styles.apply} onPress={() => commit(draft)}>
@@ -301,7 +302,7 @@ export default function CatalogScreen() {
                   Showing <Text style={styles.countBold}>{results.length} book{results.length === 1 ? '' : 's'}</Text>
                 </Text>
                 <View style={styles.toolRight}>
-                  {small ? (
+                  {compactNav ? (
                     <Pressable style={styles.filterBtn} onPress={() => { setDraft(applied); setSheetOpen(true); }}>
                       <Icon name="menu" size={14} color={BRAND.text} />
                       <Text style={styles.filterBtnText}>Filters</Text>
@@ -470,7 +471,7 @@ export default function CatalogScreen() {
                   <View style={styles.logoMark}>
                     <Icon name="book" size={15} color={BRAND.text} />
                   </View>
-                  <Text style={styles.logoText}>Chapter One Shop</Text>
+                  <LogoWord size={21} family={FONTS.serifSemi} />
                 </View>
                 <Text style={styles.footerCopy}>Thoughtfully chosen books{'\n'}for curious minds.</Text>
               </View>
@@ -527,7 +528,7 @@ export default function CatalogScreen() {
               </View>
             </View>
             <View style={styles.footerBottom}>
-              <Text style={styles.bottomText}>© 2025 Chapter One Shop</Text>
+              <Text style={styles.bottomText}>© 2025 Chapter1</Text>
               <Text style={styles.bottomText}>Privacy · Terms · Instagram</Text>
             </View>
           </View>

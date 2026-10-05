@@ -27,7 +27,7 @@ export default function AccountScreen() {
   const { user, ready, signIn, signUp, signOut } = useAuth();
   const cart = useCart();
   const { listOrders, wishlist } = useShop();
-  const { small } = useBreakpoint();
+  const { small, stacked } = useBreakpoint();
   const [mode, setMode] = useState<'signin' | 'create'>('signin');
   const [accountType, setAccountType] = useState<'buyer' | 'admin'>('buyer');
   const [name, setName] = useState('');
@@ -68,7 +68,7 @@ export default function AccountScreen() {
           `Buyer account created. To activate admin access, run this in Supabase SQL Editor: update profiles set is_admin = true where email = '${email.trim().toLowerCase()}'; then sign out and back in.`,
         );
       }
-      setHello(mode === 'signin' ? 'Signed in successfully. Welcome back!' : 'Account created successfully. Welcome to Chapter One Shop!');
+      setHello(mode === 'signin' ? 'Signed in successfully. Welcome back!' : 'Account created successfully. Welcome to Chapter1!');
     } finally {
       setBusy(false);
     }
@@ -132,8 +132,8 @@ export default function AccountScreen() {
         ) : null}
 
         <View style={[styles.main, small && styles.mainSmall]}>
-          <View style={[styles.card, small && styles.cardSmall]}>
-            {!small ? (
+          <View style={[styles.card, stacked && (small ? styles.cardSmall : styles.cardMedium)]}>
+            {!stacked ? (
               <View style={styles.welcome}>
                 <Text style={styles.welcomeTitle}>Welcome back, reader.</Text>
                 <Text style={styles.welcomeCopy}>
@@ -393,6 +393,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   cardSmall: { borderRadius: 0, borderTopLeftRadius: 24, borderTopRightRadius: 24, minHeight: 0, flexDirection: 'column' },
+  cardMedium: { minHeight: 0, flexDirection: 'column' },
   // Welcome panel
   welcome: { width: 480, backgroundColor: BRAND.ink, paddingHorizontal: 44, paddingTop: 38, paddingBottom: 40 },
   welcomeTitle: { color: '#fff', fontSize: 44, lineHeight: 48, fontFamily: FONTS.serifBold, letterSpacing: -1.5, maxWidth: 350 },

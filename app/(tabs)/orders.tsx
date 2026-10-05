@@ -40,7 +40,7 @@ export default function OrdersScreen() {
   const { user, signOut } = useAuth();
   const cart = useCart();
   const { listOrders, listOrderItems, getBook } = useShop();
-  const { small } = useBreakpoint();
+  const { small, stacked } = useBreakpoint();
   const [orders, setOrders] = useState<Order[]>([]);
   const [itemsMap, setItemsMap] = useState<Record<number, OrderItem[]>>({});
   const [query, setQuery] = useState('');
@@ -173,22 +173,22 @@ export default function OrdersScreen() {
             </View>
           </View>
 
-          {small ? (
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
-              {MENU.map((m, i) => (
-                <Pressable
-                  key={m.label}
-                  style={[styles.mchip, i === 0 && styles.mchipOn]}
-                  onPress={() => menuPress(m.label, m.to)}>
-                  <Icon name={m.icon} size={14} color={i === 0 ? '#fff' : BRAND.text} />
-                  <Text style={[styles.mchipText, i === 0 && styles.mchipTextOn]}>{m.label}</Text>
-                </Pressable>
-              ))}
-            </ScrollView>
-          ) : null}
+          <View style={[styles.layout, stacked && styles.layoutSmall]}>
+            {stacked ? (
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
+                {MENU.map((m, i) => (
+                  <Pressable
+                    key={m.label}
+                    style={[styles.mchip, i === 0 && styles.mchipOn]}
+                    onPress={() => menuPress(m.label, m.to)}>
+                    <Icon name={m.icon} size={14} color={i === 0 ? '#fff' : BRAND.text} />
+                    <Text style={[styles.mchipText, i === 0 && styles.mchipTextOn]}>{m.label}</Text>
+                  </Pressable>
+                ))}
+              </ScrollView>
+            ) : null}
 
-          <View style={[styles.layout, small && styles.layoutSmall]}>
-            {!small ? (
+          {!stacked ? (
               <View style={styles.sidebar}>
                 <View style={styles.profile}>
                   <View style={styles.avatar}>

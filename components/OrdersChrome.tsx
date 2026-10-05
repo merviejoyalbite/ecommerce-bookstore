@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { router } from 'expo-router';
 import { BRAND, FONTS } from '@/constants/theme';
 import { Icon } from '@/components/icons';
+import { LogoWord } from '@/components/Logo';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useCart } from '@/store/cart';
 
@@ -31,7 +32,7 @@ export function OrdersHeader() {
           <View style={styles.mark}>
             <Icon name="book" size={20} color="#fff" />
           </View>
-          <Text style={styles.brandText}>Chapter One Shop</Text>
+          <LogoWord size={22} color={BRAND.text} />
         </Pressable>
         {!small ? (
           <View style={styles.nav}>
@@ -94,7 +95,7 @@ export function OrdersFooter() {
             <View style={[styles.mark, styles.markLight]}>
               <Icon name="book" size={20} color={BRAND.text} />
             </View>
-            <Text style={[styles.brandText, styles.brandTextLight]}>Chapter One Shop</Text>
+            <LogoWord size={22} />
           </View>
           <Text style={styles.fcopy}>Stories to keep, worlds to discover.</Text>
         </View>
@@ -147,7 +148,7 @@ export function OrdersFooter() {
           )}
         </View>
       </View>
-      <Text style={styles.copyright}>© 2026 Chapter One Shop. Made for readers.</Text>
+      <Text style={styles.copyright}>© 2026 Chapter1. Made for readers.</Text>
     </View>
   );
 }

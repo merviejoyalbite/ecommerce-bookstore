@@ -20,7 +20,7 @@ export default function CartScreen() {
   const cart = useCart();
   const { user } = useAuth();
   const { toggleWishlist } = useShop();
-  const { small } = useBreakpoint();
+  const { small, stacked } = useBreakpoint();
   const [promoInput, setPromoInput] = useState('');
   const [promoError, setPromoError] = useState('');
   const [savedMsg, setSavedMsg] = useState('');
@@ -82,7 +82,7 @@ export default function CartScreen() {
           <Stepper step={1} />
           <PageTitle title="Your cart" sub={`${cart.count} item${cart.count === 1 ? '' : 's'}`} />
 
-        <View style={[styles.grid, small && styles.gridSmall]}>
+        <View style={[styles.grid, stacked && styles.gridSmall]}>
           <View style={styles.list}>
             {cart.lines.map((l) => {
               const tone = coverTone(l.book.tone);
@@ -165,7 +165,7 @@ export default function CartScreen() {
             {promoError ? <Text style={styles.promoError}>{promoError}</Text> : null}
           </View>
 
-          <View style={[styles.side, small && styles.sideSmall]}>
+          <View style={[styles.side, stacked && styles.sideSmall]}>
             <SummaryCard subtotal={cart.subtotal} shipping={shipping} discount={cart.discount} />
             <Text style={styles.shipCopy}>
               {toFree > 0 ? (
@@ -209,9 +209,9 @@ const styles = StyleSheet.create({
   body: { width: '100%', maxWidth: 1120, alignSelf: 'center', paddingHorizontal: 24, paddingTop: 48 },
   grid: { flexDirection: 'row', gap: 40, alignItems: 'flex-start' },
   gridSmall: { flexDirection: 'column' },
-  list: { width: 700, maxWidth: '100%' },
-  side: { width: 380, maxWidth: '100%' },
-  sideSmall: { width: '100%', marginTop: 8 },
+  list: { flex: 1.9, minWidth: 0, maxWidth: 700 },
+  side: { flex: 1, minWidth: 260, maxWidth: 380 },
+  sideSmall: { width: '100%', maxWidth: '100%', marginTop: 8 },
   // Items
   item: {
     flexDirection: 'row',

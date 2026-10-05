@@ -24,7 +24,7 @@ export default function OrderDetailScreen() {
   const { user } = useAuth();
   const cart = useCart();
   const { getOrder, listOrderItems, getBook } = useShop();
-  const { small } = useBreakpoint();
+  const { small, stacked } = useBreakpoint();
   const [order, setOrder] = useState<Order | null>(null);
   const [items, setItems] = useState<OrderItem[]>([]);
   const [denied, setDenied] = useState(false);
@@ -106,7 +106,7 @@ export default function OrderDetailScreen() {
   const idx = statusIndex(order.status);
   const events = [
     { title: 'Order placed', sub: `Order #${orderNumber(order.id)} confirmed`, date: eventDate(order.createdAt, 0), done: true },
-    { title: 'Order handed to courier', sub: 'Chapter One Fulfillment Center', date: eventDate(order.createdAt, 1), done: idx >= 1 },
+    { title: 'Order handed to courier', sub: 'Chapter1 Fulfillment Center', date: eventDate(order.createdAt, 1), done: idx >= 1 },
     { title: 'Parcel received at sorting facility', sub: 'Quezon City Distribution Hub', date: eventDate(order.createdAt, 2), done: idx >= 2 },
     { title: 'Parcel departed the sorting facility', sub: 'Out for delivery', date: eventDate(order.createdAt, 3), done: idx >= 2 },
     ...(idx >= 3 ? [{ title: 'Delivered', sub: 'Left at the front door', date: eventDate(order.createdAt, 5), done: true }] : []),
@@ -148,7 +148,7 @@ export default function OrderDetailScreen() {
             })}
           </View>
 
-          <View style={[styles.grid, small && styles.gridSmall]}>
+          <View style={[styles.grid, stacked && styles.gridSmall]}>
             <View style={styles.left}>
               <View style={styles.card}>
                 <Text style={styles.h2}>Items in this order</Text>
@@ -293,8 +293,8 @@ const styles = StyleSheet.create({
   bigLineDone: { backgroundColor: BRAND.ink },
   grid: { flexDirection: 'row', gap: 40, alignItems: 'flex-start' },
   gridSmall: { flexDirection: 'column' },
-  left: { width: 700, maxWidth: '100%' },
-  right: { width: 380, maxWidth: '100%', gap: 16 },
+  left: { flex: 1.9, minWidth: 0, maxWidth: 700 },
+  right: { flex: 1, minWidth: 260, maxWidth: 380, gap: 16 },
   card: { borderWidth: 1, borderColor: TINT15, backgroundColor: '#fff', borderRadius: 20, padding: 24, marginBottom: 16 },
   h2: { fontSize: 21, color: BRAND.text, marginBottom: 20, fontFamily: FONTS.serifBold },
   line: { flexDirection: 'row', alignItems: 'center', gap: 14, borderTopWidth: 1, borderTopColor: TINT15, minHeight: 108, paddingVertical: 12 },

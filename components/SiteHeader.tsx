@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { BRAND, FONTS } from '@/constants/theme';
 import { Icon } from '@/components/icons';
+import { LogoWord } from '@/components/Logo';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useCart } from '@/store/cart';
 
@@ -29,7 +30,7 @@ export function SiteHeader() {
       <View style={styles.inner}>
         <Pressable style={styles.logo} onPress={() => router.push('/(tabs)')}>
           <Text style={styles.logoText}>
-            <Text style={styles.logoAccent}>Chapter One</Text> Shop
+            <LogoWord size={27} color={BRAND.text} />
           </Text>
         </Pressable>
         {!small ? (

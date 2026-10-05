@@ -58,7 +58,7 @@ export function Tracker({ status, compact }: { status: string; compact?: boolean
 
 export function buildInvoice(order: Order, items: OrderItem[]): string {
   const lines = [
-    'CHAPTER ONE SHOP — ORDER INVOICE',
+    'CHAPTER1 — ORDER INVOICE',
     `Order #${orderNumber(order.id)}`,
     `Placed: ${fmtDate(order.createdAt)}`,
     `Customer: ${order.name} <${order.email}>`,

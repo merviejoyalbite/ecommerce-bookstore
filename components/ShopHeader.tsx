@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { BRAND, FONTS } from '@/constants/theme';
 import { Icon } from '@/components/icons';
+import { LogoWord } from '@/components/Logo';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useCart } from '@/store/cart';
 
@@ -17,7 +18,7 @@ export function ShopHeader() {
           <View style={styles.markSmall}>
             <Icon name="book" size={16} color="#fff" />
           </View>
-          <Text style={styles.brandTextSmall}>Chapter One Shop</Text>
+          <LogoWord size={20} color={BRAND.text} />
         </Pressable>
         <Pressable style={styles.cartBtn} accessibilityLabel={`Cart, ${cart.count} items`} onPress={() => router.push('/(tabs)/cart')}>
           <Icon name="bag" size={20} color={BRAND.text} />
@@ -37,7 +38,7 @@ export function ShopHeader() {
         <View style={styles.mark}>
           <Icon name="book" size={17} color="#fff" />
         </View>
-        <Text style={styles.brandText}>Chapter One Shop</Text>
+        <LogoWord size={23} color={BRAND.text} />
       </Pressable>
       <View style={styles.nav}>
         <Pressable style={styles.navLink} onPress={() => router.push('/(tabs)/catalog')}>
@@ -73,7 +74,7 @@ export function ShopFooter() {
           <View style={styles.fMark}>
             <Icon name="book" size={15} color={BRAND.text} />
           </View>
-          <Text style={styles.fBrandText}>Chapter One Shop</Text>
+          <LogoWord size={21} />
         </View>
         <View style={styles.fCol}>
           <Text style={styles.fHead}>Explore</Text>
@@ -111,7 +112,7 @@ export function ShopFooter() {
         </View>
       </View>
       <View style={styles.fBottom}>
-        <Text style={styles.fBottomText}>© 2025 Chapter One Shop</Text>
+        <Text style={styles.fBottomText}>© 2025 Chapter1</Text>
         <Text style={styles.fBottomText}>Privacy · Terms</Text>
       </View>
     </View>

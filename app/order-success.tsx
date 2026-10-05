@@ -9,6 +9,7 @@ import { BRAND, FONTS, coverTone } from '@/constants/theme';
 import { formatPeso } from '@/data/books';
 import { deliveryDate, fmtDate } from '@/lib/dates';
 import { Icon } from '@/components/icons';
+import { LogoWord } from '@/components/Logo';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SiteHeader } from '@/components/SiteHeader';
 import { StatusPill, Tracker, downloadInvoice, orderNumber } from '@/components/orders-ui';
@@ -35,7 +36,7 @@ const QR: boolean[][] = [
 
 function receiptHtml(order: Order, items: OrderItem[]): string {
   return `<html><body style="font-family:Georgia,serif;max-width:480px;margin:auto;padding:24px;color:#251605">
-<h1 style="text-align:center">Chapter One Shop</h1>
+<h1 style="text-align:center">Chapter1</h1>
 <p style="text-align:center;letter-spacing:3px;font-size:10px">OFFICIAL RECEIPT</p>
 <hr/>
 <p>Order no. #${orderNumber(order.id)}<br/>Issue date: ${fmtDate(order.createdAt)}<br/>${order.name} &lt;${order.email}&gt;</p>
@@ -43,7 +44,7 @@ function receiptHtml(order: Order, items: OrderItem[]): string {
 ${items.map((it) => `<p>${it.qty} × ${it.title} — ${formatPeso(it.price * it.qty)}</p>`).join('')}
 <hr/>
 <p>Subtotal: ${formatPeso(order.subtotal)}<br/>Shipping: ${order.shipping === 0 ? 'Free' : formatPeso(order.shipping)}<br/><b>Total: ${formatPeso(order.total)}</b></p>
-<p style="text-align:center">Thank you for shopping at Chapter One Shop!</p>
+<p style="text-align:center">Thank you for shopping at Chapter1!</p>
 </body></html>`;
 }
 
@@ -67,7 +68,7 @@ function invoiceHtml(order: Order, items: OrderItem[]): string {
 export default function OrderSuccessScreen() {
   const { orderId } = useLocalSearchParams<{ orderId?: string }>();
   const { getOrder, listOrderItems, books, getBook } = useShop();
-  const { small } = useBreakpoint();
+  const { small, stacked } = useBreakpoint();
   const [order, setOrder] = useState<Order | null>(null);
   const [items, setItems] = useState<OrderItem[]>([]);
   const [tab, setTab] = useState<Tab>('confirm');
@@ -184,7 +185,7 @@ export default function OrderSuccessScreen() {
                 ) : null}
               </View>
 
-              <View style={[styles.grid, small && styles.gridSmall]}>
+              <View style={[styles.grid, stacked && styles.gridSmall]}>
                 <View style={styles.left}>
                   <View style={styles.card}>
                     <View style={styles.cardHead}>
@@ -376,7 +377,7 @@ export default function OrderSuccessScreen() {
               <View style={styles.paper}>
                 <View style={styles.paperHead}>
                   <Text style={styles.paperLogo}>
-                    <Text style={styles.brown}>Chapter One</Text> Shop
+                    <LogoWord size={24} color={BRAND.text} />
                   </Text>
                   <Text style={styles.paperEyebrow}>OFFICIAL RECEIPT</Text>
                 </View>
@@ -440,7 +441,7 @@ export default function OrderSuccessScreen() {
                   ))}
                 </View>
                 <Text style={styles.qrCap}>Scan to track your order</Text>
-                <Text style={styles.paperThanks}>Thank you for shopping at Chapter One Shop!</Text>
+                <Text style={styles.paperThanks}>Thank you for shopping at Chapter1!</Text>
                 <Text style={styles.muted}>Questions? Reply to your confirmation email.</Text>
               </View>
               <View style={styles.paperActions}>
@@ -476,7 +477,7 @@ export default function OrderSuccessScreen() {
                   <View style={styles.sheetHead}>
                     <View>
                       <Text style={styles.sheetLogo}>
-                        <Text style={styles.brown}>Chapter One</Text> Shop
+                        <LogoWord size={24} color={BRAND.text} />
                       </Text>
                       <Text style={styles.sheetSub}>
                         hello@booknook.com{'\n'}118 Story Lane, Portland, OR 97205
@@ -512,7 +513,7 @@ export default function OrderSuccessScreen() {
                       <Text style={styles.partyText}>{order.status}</Text>
                     </View>
                   </View>
-                  <Text style={styles.watermark}>CHAPTER ONE</Text>
+                  <Text style={styles.watermark}>CHAPTER1</Text>
                   <View style={styles.iTable}>
                     <View style={[styles.iRow, styles.iHead]}>
                       <Text style={styles.iCell}>NO</Text>
@@ -540,7 +541,7 @@ export default function OrderSuccessScreen() {
                       <Text style={styles.partyHead}>NOTES & TERMS</Text>
                       <Text style={styles.partyText}>
                         Thank you for your purchase. Returns accepted within 7 days of delivery. Items must be unused
-                        and in their original condition. See chapterone.ph/returns.
+                        and in their original condition. See chapter1.ph/returns.
                       </Text>
                     </View>
                     <View style={styles.iTotals}>
@@ -562,7 +563,7 @@ export default function OrderSuccessScreen() {
                     </View>
                   </View>
                   <View style={styles.sheetFoot}>
-                    <Text style={styles.muted}>Chapter One Shop · hello@booknook.com</Text>
+                    <Text style={styles.muted}>Chapter1 · hello@booknook.com</Text>
                     <Text style={styles.muted}>Page 1 of 1</Text>
                   </View>
                 </View>
@@ -575,7 +576,7 @@ export default function OrderSuccessScreen() {
               <View style={styles.emailShell}>
                 <View style={styles.emailBand}>
                   <Text style={styles.emailLogo}>
-                    <Text style={styles.brown}>Chapter One</Text> <Text style={styles.white}>Shop</Text>
+                    <LogoWord size={22} color="#fff" />
                   </Text>
                 </View>
                 <View style={styles.emailBody}>
@@ -603,7 +604,7 @@ export default function OrderSuccessScreen() {
                     style={styles.btnOutlineWide}
                     onPress={() =>
                       Clipboard.setStringAsync(
-                        `Chapter One Shop — Order #${orderNumber(order.id)}\nTotal paid ${formatPeso(order.total)}\nEstimated delivery: ${deliveryDate(order.createdAt, order.method)}`,
+                        `Chapter1 — Order #${orderNumber(order.id)}\nTotal paid ${formatPeso(order.total)}\nEstimated delivery: ${deliveryDate(order.createdAt, order.method)}`,
                       )
                         .then(() => flash('Email text copied'))
                         .catch(() => flash('Could not copy'))
@@ -678,8 +679,8 @@ const styles = StyleSheet.create({
   // Grid + cards
   grid: { flexDirection: 'row', gap: 32, alignItems: 'flex-start' },
   gridSmall: { flexDirection: 'column' },
-  left: { width: 700, maxWidth: '100%', gap: 20 },
-  side: { width: 380, maxWidth: '100%' },
+  left: { flex: 1.9, minWidth: 0, maxWidth: 700, gap: 20 },
+  side: { flex: 1, minWidth: 260, maxWidth: 380 },
   card: { borderWidth: 1, borderColor: TINT15, backgroundColor: '#fff', borderRadius: 20, padding: 28 },
   cardHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 },
   h2: { fontSize: 23, color: BRAND.text, fontFamily: FONTS.serifBold },

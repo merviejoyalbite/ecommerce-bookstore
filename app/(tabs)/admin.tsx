@@ -8,6 +8,7 @@ import { BRAND, FONTS, coverTone } from '@/constants/theme';
 import { CATEGORIES, formatPeso } from '@/data/books';
 import { fmtDate } from '@/lib/dates';
 import { Icon, type IconName } from '@/components/icons';
+import { LogoWord } from '@/components/Logo';
 import { StatusPill, orderNumber } from '@/components/orders-ui';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useAuth } from '@/store/auth';
@@ -88,7 +89,7 @@ function Donut({ slices, total }: { slices: { label: string; value: number; colo
 export default function AdminScreen() {
   const { user, signOut } = useAuth();
   const { books, listOrders, listItems, listProfiles, addBook, updateBook, deleteBook } = useShop();
-  const { small, medium } = useBreakpoint();
+  const { small, medium, stacked } = useBreakpoint();
   const [view, setView] = useState<ViewKey>('dashboard');
   const [drawer, setDrawer] = useState(false);
   const [range, setRange] = useState<'week' | 'month'>('week');
@@ -281,7 +282,7 @@ export default function AdminScreen() {
     <View style={[styles.side, small && styles.sideDrawer]}>
       <View style={styles.brand}>
         <Icon name="book" size={24} color="#fff" />
-        <Text style={styles.brandText}>Chapter One Shop</Text>
+        <LogoWord size={19} />
         <View style={styles.adminBadge}>
           <Text style={styles.adminBadgeText}>ADMIN</Text>
         </View>
@@ -465,7 +466,8 @@ export default function AdminScreen() {
                       <Text style={styles.viewAll}>View all →</Text>
                     </Pressable>
                   </View>
-                  <View style={styles.table}>
+                  <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                    <View style={[styles.table, stacked && styles.tableWide]}>
                     <View style={[styles.tr, styles.trHead]}>
                       <Text style={styles.thText}>Order</Text>
                       <Text style={styles.thText}>Customer</Text>
@@ -486,7 +488,8 @@ export default function AdminScreen() {
                         <Icon name="chevron" size={14} color={BRAND.brown} />
                       </Pressable>
                     ))}
-                  </View>
+                    </View>
+                  </ScrollView>
                 </View>
 
                 <View style={[styles.panel, styles.stockPanel]}>
@@ -821,7 +824,7 @@ const styles = StyleSheet.create({
   bellText: { fontSize: 11, color: BRAND.text, fontFamily: FONTS.sans },
   content: { padding: 24, paddingBottom: 48 },
   // KPIs
-  kpis: { flexDirection: 'row', gap: 16, marginBottom: 18 },
+  kpis: { flexDirection: 'row', flexWrap: 'wrap', gap: 16, marginBottom: 18 },
   kpi: {
     flex: 1,
     backgroundColor: '#fff',
@@ -873,6 +876,7 @@ const styles = StyleSheet.create({
   legendLabel: { flex: 1, fontSize: 9, color: BRAND.text, fontFamily: FONTS.sans },
   legendVal: { fontSize: 9, fontWeight: '700', color: BRAND.text, fontFamily: FONTS.sansBold },
   table: { marginTop: 15, marginHorizontal: -19 },
+  tableWide: { minWidth: 620 },
   tr: {
     flexDirection: 'row',
     alignItems: 'center',

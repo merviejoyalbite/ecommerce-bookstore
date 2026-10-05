@@ -63,7 +63,7 @@ function Field({
 function CheckoutForm({ user }: { user: { id: string; name: string; email: string } | null }) {
   const cart = useCart();
   const { createOrder } = useShop();
-  const { small } = useBreakpoint();
+  const { small, stacked } = useBreakpoint();
   const [name, setName] = useState(user?.name ?? '');
   const [email, setEmail] = useState(user?.email ?? '');
   const [phone, setPhone] = useState('');
@@ -134,7 +134,7 @@ function CheckoutForm({ user }: { user: { id: string; name: string; email: strin
   };
 
   return (
-    <View style={[styles.grid, small && styles.gridSmall]}>
+    <View style={[styles.grid, stacked && styles.gridSmall]}>
       <View style={styles.formCol}>
         <View style={styles.card}>
           <View style={styles.sectionHead}>
@@ -234,7 +234,7 @@ function CheckoutForm({ user }: { user: { id: string; name: string; email: strin
         </View>
       </View>
 
-      <View style={[styles.sideCol, small && styles.sideColSmall]}>
+      <View style={[styles.sideCol, stacked && styles.sideColSmall]}>
         <View style={styles.itemsBox}>
           {cart.lines.map((l) => {
             const tone = coverTone(l.book.tone);
@@ -300,9 +300,9 @@ const styles = StyleSheet.create({
   body: { width: '100%', maxWidth: 1120, alignSelf: 'center', paddingHorizontal: 24, paddingTop: 48 },
   grid: { flexDirection: 'row', gap: 40, alignItems: 'flex-start' },
   gridSmall: { flexDirection: 'column' },
-  formCol: { width: 700, maxWidth: '100%', gap: 0 },
-  sideCol: { width: 380, maxWidth: '100%' },
-  sideColSmall: { width: '100%', marginTop: 24 },
+  formCol: { flex: 1.9, minWidth: 0, maxWidth: 700 },
+  sideCol: { flex: 1, minWidth: 260, maxWidth: 380 },
+  sideColSmall: { width: '100%', maxWidth: '100%', marginTop: 24 },
   card: { borderWidth: 1, borderColor: TINT_15, backgroundColor: '#fff', borderRadius: 24, padding: 32, marginBottom: 24 },
   payCard: { marginBottom: 0 },
   sectionHead: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 },

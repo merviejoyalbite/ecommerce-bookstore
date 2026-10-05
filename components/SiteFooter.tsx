@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { router } from 'expo-router';
 import { BRAND, FONTS } from '@/constants/theme';
+import { LogoWord } from '@/components/Logo';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 export function SiteFooter() {
@@ -18,7 +19,7 @@ export function SiteFooter() {
       <View style={[styles.inner, small && styles.innerSmall]}>
         <View style={styles.brand}>
           <Text style={styles.logo}>
-            <Text style={styles.logoAccent}>Chapter One</Text> Shop
+            <LogoWord size={27} />
           </Text>
           <Text style={styles.brandCopy}>Stories to keep, worlds to discover. Thoughtfully selected books delivered to your door.</Text>
         </View>
@@ -72,7 +73,7 @@ export function SiteFooter() {
         </View>
       </View>
       <View style={styles.bottom}>
-        <Text style={styles.bottomText}>© 2025 Chapter One Shop</Text>
+        <Text style={styles.bottomText}>© 2025 Chapter1</Text>
         <Text style={styles.bottomText}>Privacy · Terms</Text>
       </View>
     </View>
@@ -85,6 +86,7 @@ const styles = StyleSheet.create({
   innerSmall: { flexDirection: 'column', gap: 32 },
   brand: { flex: 2 },
   logo: { fontSize: 27, color: '#fff', fontFamily: FONTS.serifBold },
+  logoText: { fontSize: 27, color: '#fff', fontFamily: FONTS.serifBold },
   logoAccent: { color: BRAND.brown },
   brandCopy: { color: 'rgba(255,255,255,0.65)', fontSize: 11, lineHeight: 19, marginTop: 12, maxWidth: 260, fontFamily: FONTS.sans },
   col: { flex: 1, flexDirection: 'column', gap: 11 },

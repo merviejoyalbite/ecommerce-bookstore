@@ -359,7 +359,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
         genre: input.genre?.trim() || input.category.trim() || 'Fiction',
         tone: input.tone?.trim() || 'brown',
         rating: 5,
-        blurb: input.blurb.trim() || 'New arrival at Chapter One Shop.',
+        blurb: input.blurb.trim() || 'New arrival at Chapter1.',
         stock: Math.max(0, Math.floor(Number(input.stock) || 0)),
       });
       if (error) throw new Error(error.message);

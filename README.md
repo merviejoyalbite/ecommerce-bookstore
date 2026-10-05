@@ -1,4 +1,4 @@
-# E-commerce Bookstore — Chapter One Shop (React Native + Expo SDK 57 + Supabase)
+# E-commerce Bookstore — Chapter1 (React Native + Expo SDK 57 + Supabase)
 
 Functional bookstore for: https://www.figma.com/make/kmOga5owMXu3c6jIzR3347/E-commerce-Bookstore-Website-Design
 Design reference (published): https://query-gush-01955823.figma.site
@@ -31,7 +31,7 @@ Design reference (published): https://query-gush-01955823.figma.site
 - Sign up with any email, then grant `is_admin` via the SQL above for the Admin tab.
 
 ## Routes
-- `app/(tabs)/index.tsx` Chapter One Shop landing (hero, arrivals, editor's choice, bestsellers, promise, newsletter, footer)
+- `app/(tabs)/index.tsx` Chapter1 landing (hero, arrivals, editor's choice, bestsellers, promise, newsletter, footer)
 - `app/(tabs)/catalog.tsx` search + category filter (`?q=`, `?cat=`)
 - `app/(tabs)/cart.tsx` persistent per-user cart (Supabase; guests in-memory)
 - `app/(tabs)/wishlist.tsx` saved books (login required)

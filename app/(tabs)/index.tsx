@@ -6,6 +6,7 @@ import * as Linking from 'expo-linking';
 import { BRAND, FONTS, coverTone } from '@/constants/theme';
 import { CATEGORIES, FEATURED_BOOK_ID, formatPeso } from '@/data/books';
 import { BookCard } from '@/components/BookCard';
+import { LogoWord } from '@/components/Logo';
 import { Icon } from '@/components/icons';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useAuth } from '@/store/auth';
@@ -32,7 +33,7 @@ function Logo() {
       <View style={styles.logoMark}>
         <Icon name="book" size={20} color="#fff" />
       </View>
-      <Text style={styles.logoText}>Chapter One Shop</Text>
+      <LogoWord size={22} />
     </View>
   );
 }
@@ -63,7 +64,7 @@ export default function HomeScreen() {
   const cart = useCart();
   const { user } = useAuth();
   const { books, getBook } = useShop();
-  const { small } = useBreakpoint();
+  const { small, stacked } = useBreakpoint();
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [email, setEmail] = useState('');
@@ -170,7 +171,7 @@ export default function HomeScreen() {
         </View>
 
         {/* ── Hero ── */}
-        <View style={[styles.hero, !small && styles.heroRow]}>
+        <View style={[styles.hero, stacked ? undefined : styles.heroRow]}>
           <View style={styles.heroCopy}>
             <Text style={styles.eyebrowDark}>—  STORIES WORTH KEEPING</Text>
             <Text style={[styles.heroTitle, small && styles.heroTitleSmall]}>
@@ -272,14 +273,14 @@ export default function HomeScreen() {
             <View style={styles.featuredVisual}>
               <View style={styles.openBook}>
                 <View style={styles.pageLeft}>
-                  <Text style={styles.pageHead}>Chapter One Edition</Text>
+                  <Text style={styles.pageHead}>Chapter1 Edition</Text>
                   <View style={styles.pageLine} />
                   <View style={[styles.pageLine, { width: '86%' }]} />
                   <View style={[styles.pageLine, { width: '93%' }]} />
                   <View style={[styles.pageLine, { width: '68%' }]} />
                 </View>
                 <View style={styles.pageRight}>
-                  <Text style={styles.pageHead}>Chapter One Edition</Text>
+                  <Text style={styles.pageHead}>Chapter1 Edition</Text>
                   <View style={styles.pageLine} />
                   <View style={[styles.pageLine, { width: '86%' }]} />
                   <View style={[styles.pageLine, { width: '93%' }]} />
@@ -341,7 +342,7 @@ export default function HomeScreen() {
 
         {/* ── Values ── */}
         <View style={styles.values}>
-          <Text style={styles.eyebrowCenter}>The Chapter One promise</Text>
+          <Text style={styles.eyebrowCenter}>The Chapter1 promise</Text>
           <Text style={styles.h2Center}>Good books, delivered well</Text>
           <View style={[styles.valueGrid, small && styles.valueGridSmall]}>
             {[
@@ -375,7 +376,7 @@ export default function HomeScreen() {
         <View style={styles.newsletter}>
           <View style={[styles.newsInner, small && styles.newsInnerSmall]}>
             <View style={styles.newsLeft}>
-              <Text style={styles.newsEyebrow}>Notes from Chapter One</Text>
+              <Text style={styles.newsEyebrow}>Notes from Chapter1</Text>
               <Text style={[styles.newsTitle, small && styles.newsTitleSmall]}>Make room for{'\n'}your next favourite.</Text>
             </View>
             <View style={styles.newsRight}>
@@ -470,7 +471,7 @@ export default function HomeScreen() {
             </View>
           </View>
           <View style={[styles.footerBottom, small && styles.footerBottomSmall]}>
-            <Text style={styles.copy}>© 2025 Chapter One Shop. All rights reserved.</Text>
+            <Text style={styles.copy}>© 2025 Chapter1. All rights reserved.</Text>
             <View style={styles.legal}>
               <Text style={styles.legalLink}>Terms</Text>
               <Text style={styles.legalLink}>Privacy</Text>
